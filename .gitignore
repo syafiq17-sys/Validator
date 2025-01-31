@@ -1,18 +1,50 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Username Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Username Validation</h2>
+    <label for="username">Enter username:</label>
+    <input type="text" id="username" oninput="validateUsername()">
+    <p id="error-message" class="error"></p>
 
-# Other files and folders
-.settings/
+    <script>
+        function validateUsername() {
+            let username = document.getElementById("username").value;
+            let errorMessage = document.getElementById("error-message");
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+            // Regular expression: only alphanumeric and hyphen, no start or end hyphen
+            let regex = /^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/;
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+            if (regex.test(username)) {
+                errorMessage.textContent = "✅ Valid username!";
+                errorMessage.className = "success";
+            } else {
+                errorMessage.textContent = "❌ Invalid username! Only letters, numbers, and hyphens allowed. No hyphens at the start or end.";
+                errorMessage.className = "error";
+            }
+        }
+    </script>
+</body>
+</html>
